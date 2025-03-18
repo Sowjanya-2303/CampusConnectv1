@@ -20,7 +20,6 @@ const Login = () => {
         const storedUser = JSON.parse(localStorage.getItem("user"));
         
         if (storedUser && storedUser.email === formData.email && storedUser.password === formData.password) {
-            alert("Login Successful!");
             navigate("/dashboard");
         } else {
             alert("Invalid email or password!");
@@ -30,6 +29,7 @@ const Login = () => {
     return (
         <div className="login-container">
             <div className="login-box">
+                <h1>Welcome to CampusConnect! :)</h1> {/* This statement is now displayed on the login page */}
                 <h2>Login Form</h2>
                 <form onSubmit={handleSubmit}>
                     <label>Email:</label>

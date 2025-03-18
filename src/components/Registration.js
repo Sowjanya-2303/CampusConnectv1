@@ -31,7 +31,6 @@ const RegistrationForm = () => {
             return;
         }
         
-        // Store user details in localStorage
         localStorage.setItem("user", JSON.stringify({
             fullName: formData.fullName,
             email: formData.email,
@@ -43,7 +42,6 @@ const RegistrationForm = () => {
             password: formData.password,
         }));
         
-        // Store resume file (In real scenario, this would be uploaded to a server)
         const reader = new FileReader();
         reader.readAsDataURL(formData.resume);
         reader.onload = () => {
@@ -55,37 +53,32 @@ const RegistrationForm = () => {
     };
 
     return (
-        <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-            <h2 className="text-2xl font-bold mb-4 text-center">Placement Registration</h2>
+        <div style={{ maxWidth: "600px", margin: "50px auto", padding: "20px", backgroundColor: "white", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", borderRadius: "10px" }}>
+            <h2 style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold", marginBottom: "20px" }}>Placement Registration</h2>
             <form onSubmit={handleSubmit}>
-                <label>Full Name:</label>
-                <input type="text" name="fullName" onChange={handleChange} required />
-                
-                <label>Email:</label>
-                <input type="email" name="email" onChange={handleChange} required />
-                
-                <label>Contact Number:</label>
-                <input type="text" name="contact" onChange={handleChange} required />
-                
-                <label>College Name:</label>
-                <input type="text" name="college" onChange={handleChange} required />
-                
-                <label>Degree:</label>
-                <input type="text" name="degree" onChange={handleChange} required />
-                
-                <label>Graduation Year:</label>
-                <input type="number" name="gradYear" onChange={handleChange} required />
-                
-                <label>Technical Skills:</label>
-                <input type="text" name="skills" onChange={handleChange} required />
-                
-                <label>Upload Resume:</label>
-                <input type="file" name="resume" onChange={handleChange} required />
-                
-                <label>Password:</label>
-                <input type="password" name="password" onChange={handleChange} required />
-                
-                <button type="submit" className="mt-4 w-full bg-blue-500 text-white p-2 rounded-lg">Register</button>
+                {[
+                    { label: "Full Name", name: "fullName", type: "text" },
+                    { label: "Email", name: "email", type: "email" },
+                    { label: "Contact Number", name: "contact", type: "text" },
+                    { label: "College Name", name: "college", type: "text" },
+                    { label: "Degree", name: "degree", type: "text" },
+                    { label: "Graduation Year", name: "gradYear", type: "number" },
+                    { label: "Technical Skills", name: "skills", type: "text" },
+                    { label: "Upload Resume", name: "resume", type: "file" },
+                    { label: "Password", name: "password", type: "password" },
+                ].map(({ label, name, type }) => (
+                    <div key={name} style={{ marginBottom: "15px" }}>
+                        <label style={{ display: "block", marginBottom: "5px", fontWeight: "bold" }}>{label}:</label>
+                        <input 
+                            type={type} 
+                            name={name} 
+                            onChange={handleChange} 
+                            required 
+                            style={{ width: "100%", padding: "10px", borderRadius: "5px", border: "1px solid #ccc" }}
+                        />
+                    </div>
+                ))}
+                <button type="submit" style={{ width: "100%", backgroundColor: "#007BFF", color: "white", padding: "10px", borderRadius: "5px", border: "none", cursor: "pointer" }}>Register</button>
             </form>
         </div>
     );
